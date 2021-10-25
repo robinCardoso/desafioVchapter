@@ -51,64 +51,67 @@ class Article {
 
     loopCriacaoDeArtigos(qtd) {
         for (let i = 0; i < qtd; i++) {
+            cy.visit('editor/');
+            cy.wait(5000);
             const NumberArticle = this.NumberArticleGenerator(0, 500000);
-            cy.visit('editor/')
-            cy.get(el.MENU_ARTICLE.inputTitle).type(`Criando Artigo: Curtir ${NumberArticle}`);
-            cy.get(el.MENU_ARTICLE.inputDescription).type('Artigo para teste Curtir');
-            cy.get(el.MENU_ARTICLE.inputBody).type('Intensão do teste é criar um novo arquivo preenchendo todos os campos necessários para curtir.');
-            cy.get(el.MENU_ARTICLE.inputTag).type('#ArtigoCurtir');
+            cy.get(el.MENU_ARTICLE.inputTitle).type(`Criando Artigo: Deletar ${NumberArticle}`);
+            cy.get(el.MENU_ARTICLE.inputDescription).type('Artigo para teste Deletar');
+            cy.get(el.MENU_ARTICLE.inputBody).type('Deletar este arquivo.');
+            cy.get(el.MENU_ARTICLE.inputTag).type('#ArtigoDeletar');
 
             this.submeterArtigo();
-
-            cy.wait(1000);
-            cy.get('h1.ng-binding').contains(`Criando Artigo: Curtir ${NumberArticle}`);
-        }
+            cy.get('h1.ng-binding').contains(`Criando Artigo: Deletar ${NumberArticle}`);
+        };
     };
 
     clicarGlobalFeeds() {
-
         cy.get('div.feed-toggle').contains('Global Feed').click();
     };
 
-    deletarTodosOsArtigos() {
-        cy.visit('login');
-        /* Acessando Feed */
-        cy.get('div.feed-toggle').contains('Global Feed').click();
+    deleteArticle($noArticle) {
 
-        /* Verificar quantidade de paginas de artigos */
-        cy.get('a[class="page-link ng-binding"]').each(() => {
+        cy.log($noArticle);
 
-            cy.get('h1[ng-bind="$ctrl.article.title"]').should('be.visible').then(() => {
+        const msgError = $noArticle.trim(); /* trim() - Retira espaços vazios */
 
-                cy.get('h1[ng-bind="$ctrl.article.title"]').each(($artigos) => {
-                    const tituloArtigo = [];
+        if (msgError != 'No articles are here... yet.') {
+            cy.get(el.MENU_ARTICLE.titleArticle).should('be.visible').each($artigos => {
+                const tituloArtigo = [];
 
-                    tituloArtigo.push($artigos.text());
+                tituloArtigo.push($artigos.text());
 
-                    for (let artigo of tituloArtigo) {
+                for (let artigo of tituloArtigo) {
 
-                        const tentativas = 10;
-
-                        cy.get('div[class="article-preview"]').invoke('text').then($noArticle => {
-                            for (let i = 0; i < tentativas; i++) {
-                                if ('No articles are here... yet.' == $noArticle) {
-                                    this.clicarGlobalFeeds();
-                                    cy.log(`Numero de tentativa: ${tentativas}`);
-                                } else {
-                                    cy.get('h1[ng-bind="$ctrl.article.title"]').contains(artigo).click();
-                                    cy.wait(500);
-                                    this.buttonDeletarArtigo();
-
-                                    this.clicarGlobalFeeds();
-                                }
-                            };
-                        });
-                    };
-                });
+                    cy.get(el.MENU_ARTICLE.titleArticle).contains(artigo).click();
+                    this.buttonDeletarArtigo();
+                    this.clicarGlobalFeeds();
+                };
+                this.verificarSeTemMaisArtigos();
             });
+        }else{
+            cy.log('Todos os artigos foram excluidos!')
+        }
+    };
+
+    verificarSeTemMaisArtigos() {
+        cy.get(el.MENU_ARTICLE.viewMsg).invoke('text').then($noArticle => {
+            this.deleteArticle($noArticle);
         })
     };
 
+    deletarTodosOsArtigos() {
+        cy.visit('');
+
+        /* Acessando Feed */
+        this.clicarGlobalFeeds();
+
+        cy.contains('Loading articles...').should('not.be.visible').then(() => {
+
+            cy.contains('No articles are here... yet.').should('be.visible').then(() => {
+                this.verificarSeTemMaisArtigos();
+            });
+        });
+    };
 };
 
 export default new Article();

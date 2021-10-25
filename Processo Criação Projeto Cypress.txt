@@ -1,0 +1,8 @@
+# Comandos de inicialização
+npm init --yes
+npm install cypress@8.5.0 -D
+npx cypress open
+
+# Configurações
+1º Alterado pasta de integração dos testes para - testsChapterV
+2º Configurando 

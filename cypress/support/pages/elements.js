@@ -19,7 +19,10 @@ const elementos = {
         buttonDeletar: 'div [class="banner"] button[ng-click*="deleteArticle"]',
         buttonEditar: 'div [class="banner"] a[href*="#/editor"]',
         cliqueLike : 'btn btn-sm btn-outline-primary',
-        cliqueDeslike : 'btn btn-sm btn-primary'
+        cliqueDeslike : 'btn btn-sm btn-primary',
+        viewMsg: 'div:nth-child(2).article-preview',
+        titleArticle: 'h1[ng-bind="$ctrl.article.title"]',
+        pageNavegation: 'a[class="page-link ng-binding"]'
     }
 };
 
