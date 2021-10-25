@@ -1,0 +1,126 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-10-25T11:07:56.379Z",
+    "end": "2021-10-25T11:07:59.890Z",
+    "duration": 3511,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "439ea33a-fc4d-4f5a-a4c0-13d3f751b6f0",
+      "title": "",
+      "fullFile": "cypress/testsChapterV/Desafio-funcionalidade-login.spec.js",
+      "file": "cypress/testsChapterV/Desafio-funcionalidade-login.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d3029dd7-e861-433d-80b8-221e8efd7b6e",
+          "title": "Verificando funcionalidade da pagina de login",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verificar mensagem de erro para: e-mail ou senha incorreto",
+              "fullTitle": "Verificando funcionalidade da pagina de login Verificar mensagem de erro para: e-mail ou senha incorreto",
+              "timedOut": null,
+              "duration": 2688,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.intercept({\n  method: 'POST',\n  path: '/api/users/login'\n}, {\n  statusCode: 403,\n  fixture: 'pages/login/senha-email-incorretos.json'\n}).as('postUsersLogin');\n/* Acessar Link para login */\ncy.visit('login');\n/* Digitar Email */\ncy.get(_elements.default.MENU_LOGIN.inputEmail).type('emailErrado@gmail.com');\n/* Digitar Senha */\ncy.get(_elements.default.MENU_LOGIN.inputPassword).type('senhaErrada');\n/* Submeter login */\ncy.get(_elements.default.MENU_LOGIN.buttonSubmit).click();\n/* Verificar mensagem de Erro */\ncy.get(_elements.default.MENU_LOGIN.msgError).contains('email or password is invalid');",
+              "err": {},
+              "uuid": "d3b802ad-1ced-4237-80a5-87f92ad7fe19",
+              "parentUUID": "d3029dd7-e861-433d-80b8-221e8efd7b6e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Verificar mensagem de erro para: e-mail não informado",
+              "fullTitle": "Verificando funcionalidade da pagina de login Verificar mensagem de erro para: e-mail não informado",
+              "timedOut": null,
+              "duration": 774,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.intercept({\n  method: 'POST',\n  path: '/api/users/login'\n}, {\n  statusCode: 422,\n  fixture: 'pages/login/email-nao-informado.json'\n}).as('postUsersLogin');\n/* Acessar Link para login */\ncy.visit('login');\n/* Digitar Senha */\ncy.get(_elements.default.MENU_LOGIN.inputPassword).type('senhaErrada');\n/* Submeter login */\ncy.get(_elements.default.MENU_LOGIN.buttonSubmit).click();\n/* Verificar mensagem de Erro */\ncy.get(_elements.default.MENU_LOGIN.msgError).contains(\"email can't be blank\");",
+              "err": {},
+              "uuid": "d0a6923d-7db3-43fb-855e-24ad645923e6",
+              "parentUUID": "d3029dd7-e861-433d-80b8-221e8efd7b6e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d3b802ad-1ced-4237-80a5-87f92ad7fe19",
+            "d0a6923d-7db3-43fb-855e-24ad645923e6"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3462,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": true,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.3.1"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "mochawesome-report",
+        "quiet": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}
