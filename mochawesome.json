@@ -5,9 +5,9 @@
     "passes": 2,
     "pending": 0,
     "failures": 0,
-    "start": "2021-10-25T11:07:56.379Z",
-    "end": "2021-10-25T11:07:59.890Z",
-    "duration": 3511,
+    "start": "2021-10-25T17:26:09.544Z",
+    "end": "2021-10-25T17:26:12.459Z",
+    "duration": 2915,
     "testsRegistered": 2,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "439ea33a-fc4d-4f5a-a4c0-13d3f751b6f0",
+      "uuid": "9611fc4e-90b3-4d58-b1c2-5ecfb233f877",
       "title": "",
       "fullFile": "cypress/testsChapterV/Desafio-funcionalidade-login.spec.js",
       "file": "cypress/testsChapterV/Desafio-funcionalidade-login.spec.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "d3029dd7-e861-433d-80b8-221e8efd7b6e",
+          "uuid": "f711b228-fdd7-4ee3-94fb-9546faa95916",
           "title": "Verificando funcionalidade da pagina de login",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Verificar mensagem de erro para: e-mail ou senha incorreto",
               "fullTitle": "Verificando funcionalidade da pagina de login Verificar mensagem de erro para: e-mail ou senha incorreto",
               "timedOut": null,
-              "duration": 2688,
+              "duration": 2252,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -47,8 +47,8 @@
               "context": null,
               "code": "cy.intercept({\n  method: 'POST',\n  path: '/api/users/login'\n}, {\n  statusCode: 403,\n  fixture: 'pages/login/senha-email-incorretos.json'\n}).as('postUsersLogin');\n/* Acessar Link para login */\ncy.visit('login');\n/* Digitar Email */\ncy.get(_elements.default.MENU_LOGIN.inputEmail).type('emailErrado@gmail.com');\n/* Digitar Senha */\ncy.get(_elements.default.MENU_LOGIN.inputPassword).type('senhaErrada');\n/* Submeter login */\ncy.get(_elements.default.MENU_LOGIN.buttonSubmit).click();\n/* Verificar mensagem de Erro */\ncy.get(_elements.default.MENU_LOGIN.msgError).contains('email or password is invalid');",
               "err": {},
-              "uuid": "d3b802ad-1ced-4237-80a5-87f92ad7fe19",
-              "parentUUID": "d3029dd7-e861-433d-80b8-221e8efd7b6e",
+              "uuid": "c7f9eff5-e1f5-45d4-affb-0c6b3de05321",
+              "parentUUID": "f711b228-fdd7-4ee3-94fb-9546faa95916",
               "isHook": false,
               "skipped": false
             },
@@ -56,7 +56,7 @@
               "title": "Verificar mensagem de erro para: e-mail não informado",
               "fullTitle": "Verificando funcionalidade da pagina de login Verificar mensagem de erro para: e-mail não informado",
               "timedOut": null,
-              "duration": 774,
+              "duration": 637,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -65,21 +65,21 @@
               "context": null,
               "code": "cy.intercept({\n  method: 'POST',\n  path: '/api/users/login'\n}, {\n  statusCode: 422,\n  fixture: 'pages/login/email-nao-informado.json'\n}).as('postUsersLogin');\n/* Acessar Link para login */\ncy.visit('login');\n/* Digitar Senha */\ncy.get(_elements.default.MENU_LOGIN.inputPassword).type('senhaErrada');\n/* Submeter login */\ncy.get(_elements.default.MENU_LOGIN.buttonSubmit).click();\n/* Verificar mensagem de Erro */\ncy.get(_elements.default.MENU_LOGIN.msgError).contains(\"email can't be blank\");",
               "err": {},
-              "uuid": "d0a6923d-7db3-43fb-855e-24ad645923e6",
-              "parentUUID": "d3029dd7-e861-433d-80b8-221e8efd7b6e",
+              "uuid": "e0345165-8696-4263-9378-542c9ff53d66",
+              "parentUUID": "f711b228-fdd7-4ee3-94fb-9546faa95916",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "d3b802ad-1ced-4237-80a5-87f92ad7fe19",
-            "d0a6923d-7db3-43fb-855e-24ad645923e6"
+            "c7f9eff5-e1f5-45d4-affb-0c6b3de05321",
+            "e0345165-8696-4263-9378-542c9ff53d66"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 3462,
+          "duration": 2889,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
