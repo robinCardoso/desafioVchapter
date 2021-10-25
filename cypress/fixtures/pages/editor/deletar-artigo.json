@@ -1,0 +1,22 @@
+{
+    "article": {
+        "slug": "DeletandoArtigo-612",
+        "title": "DeletandoArtigo",
+        "description": "DeletandoArtigo",
+        "body": "Este arquivo é um para testar button delete",
+        "createdAt": "2021-10-22T13:10:42.629Z",
+        "updatedAt": "2021-10-22T13:10:42.629Z",
+        "tagList": [],
+        "author": {
+            "username": "chapterVrobi",
+            "bio": null,
+            "image": "https://realworld-temp-api.herokuapp.com/images/smiley-cyrus.jpeg"
+        },
+        "favoritedBy": [],
+        "_count": {
+            "favoritedBy": 0
+        },
+        "favoritesCount": 0,
+        "favorited": false
+    }
+}
