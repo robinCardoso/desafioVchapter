@@ -1,0 +1,32 @@
+name: desafioV
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+    - run: npm install
+    - run: npm run cy:run
+      continue-on-error: true
+    - run: npm run report:merge
+    - run: npm run report:mocha  
+    
+    - name: Deploy to GitHub Pages
+      # You may pin to the exact commit or the version.
+      # uses: JamesIves/github-pages-deploy-action@0f24da7de3e7e135102609a4c9633b025be8411b
+      uses: JamesIves/github-pages-deploy-action@4.1.5
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: mochawesome-report
