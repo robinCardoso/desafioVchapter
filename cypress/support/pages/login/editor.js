@@ -52,7 +52,7 @@ class Article {
     loopCriacaoDeArtigos(qtd) {
         for (let i = 0; i < qtd; i++) {
             cy.visit('editor/');
-            cy.wait(5000);
+            cy.wait(500);
             const NumberArticle = this.NumberArticleGenerator(0, 500000);
             cy.get(el.MENU_ARTICLE.inputTitle).type(`Criando Artigo: Deletar ${NumberArticle}`);
             cy.get(el.MENU_ARTICLE.inputDescription).type('Artigo para teste Deletar');
@@ -68,49 +68,63 @@ class Article {
         cy.get('div.feed-toggle').contains('Global Feed').click();
     };
 
-    deleteArticle($noArticle) {
+    acessarArtigoEDeletar() {
 
-        cy.log($noArticle);
+        cy.get(el.MENU_ARTICLE.viewMsg).invoke('text').then($noArticle => {
+            cy.wait(500);
 
-        const msgError = $noArticle.trim(); /* trim() - Retira espaços vazios */
+            const msgError = $noArticle.trim(); /* trim() - Retira espaços vazios */
 
-        if (msgError != 'No articles are here... yet.') {
-            cy.get(el.MENU_ARTICLE.titleArticle).should('be.visible').each($artigos => {
-                const tituloArtigo = [];
+            if (msgError != 'No articles are here... yet.') {
 
-                tituloArtigo.push($artigos.text());
+                cy.get(el.MENU_ARTICLE.titleArticle).should('be.visible').each($artigos => {
+                    const tituloArtigo = [];
 
-                for (let artigo of tituloArtigo) {
+                    tituloArtigo.push($artigos.text());
 
-                    cy.get(el.MENU_ARTICLE.titleArticle).contains(artigo).click();
-                    this.buttonDeletarArtigo();
-                    this.clicarGlobalFeeds();
-                };
+                    for (let artigo of tituloArtigo) {
+
+                        cy.get(el.MENU_ARTICLE.titleArticle).contains(artigo).click();
+                        this.buttonDeletarArtigo();
+                        this.clicarGlobalFeeds();
+
+                        cy.log('Clicando no feed pelo for artigo');
+                    };
+                });
                 this.verificarSeTemMaisArtigos();
-            });
-        }else{
-            cy.log('Todos os artigos foram excluidos!')
-        }
+            } else {
+                cy.log('Todos os artigos foram excluidos: acessarArtigoEDeletar!');
+            }
+        });
     };
 
     verificarSeTemMaisArtigos() {
-        cy.get(el.MENU_ARTICLE.viewMsg).invoke('text').then($noArticle => {
-            this.deleteArticle($noArticle);
+
+        this.clicarGlobalFeeds();
+
+        cy.contains('Loading articles...').should('not.be.visible').then(() => {
+
+            cy.wait(2000);
+
+            cy.get(el.MENU_ARTICLE.viewMsg).invoke('text').then($noArticle => {
+
+                const msgError = $noArticle.trim(); /* trim() - Retira espaços vazios */
+
+                cy.log(msgError);
+
+                if (msgError == 'No articles are here... yet.') {
+                    cy.log('Todos os artigos foram excluidos: verificarSeTemMaisArtigos!');
+                } else {
+                    this.acessarArtigoEDeletar();
+                }
+            })
         })
     };
 
     deletarTodosOsArtigos() {
         cy.visit('');
 
-        /* Acessando Feed */
-        this.clicarGlobalFeeds();
-
-        cy.contains('Loading articles...').should('not.be.visible').then(() => {
-
-            cy.contains('No articles are here... yet.').should('be.visible').then(() => {
-                this.verificarSeTemMaisArtigos();
-            });
-        });
+        this.verificarSeTemMaisArtigos();
     };
 };
 

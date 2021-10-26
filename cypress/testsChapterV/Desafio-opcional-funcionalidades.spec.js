@@ -267,7 +267,7 @@ describe('Testando a pagina GlobalFeed, curtir e deletar artigos.', () => {
     });
 
     it('Testando a função curtir artigo: Criar 10 Artigos novos para o teste', () => {
-        Article.loopCriacaoDeArtigos(10);
+        Article.loopCriacaoDeArtigos(15);
     });
 
     it('Testando a função curtir artigo: Deve curtir todos os posts verificando todas as paginas de artigos.', () => {

@@ -20,7 +20,7 @@ const elementos = {
         buttonEditar: 'div [class="banner"] a[href*="#/editor"]',
         cliqueLike : 'btn btn-sm btn-outline-primary',
         cliqueDeslike : 'btn btn-sm btn-primary',
-        viewMsg: 'div:nth-child(2).article-preview',
+        viewMsg: 'div[class="article-preview"]',
         titleArticle: 'h1[ng-bind="$ctrl.article.title"]',
         pageNavegation: 'a[class="page-link ng-binding"]'
     }
